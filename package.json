@@ -1,0 +1,18 @@
+{
+  "name": "cse446",
+  "version": "1.0.0",
+  "description": "A simple Blockchain Student Records website showcasing Solidity checkpoint contracts.",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "blockchain-student-records",
+    "solidity",
+    "blockchain",
+    "student-records"
+  ],
+  "author": "Md. Tasnim Kabir",
+  "license": "MIT"
+}

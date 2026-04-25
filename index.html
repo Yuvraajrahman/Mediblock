@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Blockchain Student Records is a student Solidity project for checking IDs and storing academic records on-chain."
+    />
+    <title>Blockchain Student Records | Solidity Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Blockchain Student Records home">
+          <span class="brand-mark">M</span>
+          <span>Blockchain Student Records</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#contracts">Contracts</a>
+          <a href="#demo">Demo</a>
+          <a href="https://github.com/Yuvraajrahman/CSE446" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Solidity project website</p>
+          <h1>Student identity and academic records, explained simply.</h1>
+          <p class="hero-text">
+            Blockchain Student Records showcases a progression of Solidity smart contracts for ID checking,
+            student lookup, and semester record storage.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#demo">Try the ID checker</a>
+            <a class="button secondary" href="https://github.com/Yuvraajrahman/CSE446" target="_blank" rel="noreferrer">
+              View GitHub page
+            </a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Project summary">
+          <span class="status-pill">Final submission</span>
+          <h2>IDChecker</h2>
+          <p>
+            The final contract returns the stored student name when a submitted ID is divisible
+            by its last two digits.
+          </p>
+          <div class="metric-grid">
+            <div>
+              <strong>4</strong>
+              <span>Solidity files</span>
+            </div>
+            <div>
+              <strong>0.8.x</strong>
+              <span>Compiler line</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section-heading">
+          <p class="eyebrow">What it demonstrates</p>
+          <h2>A compact smart contract learning path</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>ID verification</h3>
+            <p>Checks a submitted student ID and returns a matching student name when the rule passes.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Student directory</h3>
+            <p>Uses mappings to store and retrieve student names by numeric student IDs.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Semester records</h3>
+            <p>Stores multiple semester entries per student with GPA, semester name, and course count.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="contracts">
+        <div>
+          <p class="eyebrow">Repository timeline</p>
+          <h2>From checkpoint to final contract</h2>
+          <p>
+            Each checkpoint adds a new Solidity concept, ending with the final submission contract
+            used by the page demo.
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span>01</span>
+            <div>
+              <h3>StudentCheck</h3>
+              <p>Exact ID matching against a stored student ID.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span>02</span>
+            <div>
+              <h3>StudentDirectory</h3>
+              <p>Adds a mapping for student lookup.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span>03</span>
+            <div>
+              <h3>StudentData</h3>
+              <p>Introduces structs and arrays for semester records.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span>04</span>
+            <div>
+              <h3>IDChecker</h3>
+              <p>Final rule-based ID checker contract.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section demo-section" id="demo">
+        <div class="demo-copy">
+          <p class="eyebrow">Interactive demo</p>
+          <h2>Try the final ID rule</h2>
+          <p>
+            Enter a number. The demo mirrors the final Solidity contract: if the full ID is divisible
+            by its last two digits, it returns the stored name.
+          </p>
+        </div>
+        <form class="checker-card" id="id-checker">
+          <label for="student-id">Student ID</label>
+          <input id="student-id" name="student-id" type="number" inputmode="numeric" placeholder="Example: 21301647" required />
+          <button class="button primary" type="submit">Check ID</button>
+          <output class="result" id="checker-result" for="student-id">Result will appear here.</output>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built for the Blockchain Student Records Solidity project.</p>
+      <a href="https://github.com/Yuvraajrahman/CSE446" target="_blank" rel="noreferrer">Open the GitHub repository</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
