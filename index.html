@@ -1,158 +1,212 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Blockchain Student Records is a student Solidity project for checking IDs and storing academic records on-chain."
-    />
-    <title>Blockchain Student Records | Solidity Project</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediBlock Patient Management</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+    <script defer src="script.js"></script>
   </head>
   <body>
-    <header class="site-header">
-      <nav class="nav" aria-label="Main navigation">
-        <a class="brand" href="#home" aria-label="Blockchain Student Records home">
-          <span class="brand-mark">M</span>
-          <span>Blockchain Student Records</span>
-        </a>
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#contracts">Contracts</a>
-          <a href="#demo">Demo</a>
-          <a href="https://github.com/Yuvraajrahman/CSE446" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-      </nav>
+    <header class="hero">
+      <p class="eyebrow">BRAC University</p>
+      <h1>MediBlock Patient Management</h1>
+      <p>
+        Final project of the CSE446 Blockchain and Cryptocurrency course in BRACU.
+        This website is built for local blockchain testing with Ganache and MetaMask.
+      </p>
     </header>
 
-    <main id="home">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Solidity project website</p>
-          <h1>Student identity and academic records, explained simply.</h1>
-          <p class="hero-text">
-            Blockchain Student Records showcases a progression of Solidity smart contracts for ID checking,
-            student lookup, and semester record storage.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#demo">Try the ID checker</a>
-            <a class="button secondary" href="https://github.com/Yuvraajrahman/CSE446" target="_blank" rel="noreferrer">
-              View GitHub page
-            </a>
-          </div>
-        </div>
-        <aside class="hero-card" aria-label="Project summary">
-          <span class="status-pill">Final submission</span>
-          <h2>IDChecker</h2>
-          <p>
-            The final contract returns the stored student name when a submitted ID is divisible
-            by its last two digits.
-          </p>
-          <div class="metric-grid">
-            <div>
-              <strong>4</strong>
-              <span>Solidity files</span>
-            </div>
-            <div>
-              <strong>0.8.x</strong>
-              <span>Compiler line</span>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="section" id="features">
-        <div class="section-heading">
-          <p class="eyebrow">What it demonstrates</p>
-          <h2>A compact smart contract learning path</h2>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3>ID verification</h3>
-            <p>Checks a submitted student ID and returns a matching student name when the rule passes.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Student directory</h3>
-            <p>Uses mappings to store and retrieve student names by numeric student IDs.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Semester records</h3>
-            <p>Stores multiple semester entries per student with GPA, semester name, and course count.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section split" id="contracts">
+    <main>
+      <section class="card setup">
         <div>
-          <p class="eyebrow">Repository timeline</p>
-          <h2>From checkpoint to final contract</h2>
+          <h2>Connect Local Contract</h2>
           <p>
-            Each checkpoint adds a new Solidity concept, ending with the final submission contract
-            used by the page demo.
+            Start Ganache, deploy the Truffle contract, switch MetaMask to the same local network,
+            then paste the deployed contract address here.
           </p>
         </div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <span>01</span>
-            <div>
-              <h3>StudentCheck</h3>
-              <p>Exact ID matching against a stored student ID.</p>
-            </div>
+        <div class="grid two">
+          <label>
+            Contract Address
+            <input id="contractAddress" placeholder="0x..." autocomplete="off" />
+          </label>
+          <div class="actions">
+            <button id="saveContract">Save Address</button>
+            <button id="connectWallet">Connect MetaMask</button>
           </div>
-          <div class="timeline-item">
-            <span>02</span>
-            <div>
-              <h3>StudentDirectory</h3>
-              <p>Adds a mapping for student lookup.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span>03</span>
-            <div>
-              <h3>StudentData</h3>
-              <p>Introduces structs and arrays for semester records.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span>04</span>
-            <div>
-              <h3>IDChecker</h3>
-              <p>Final rule-based ID checker contract.</p>
-            </div>
-          </div>
+        </div>
+        <div class="status">
+          <span id="walletStatus">Wallet not connected</span>
+          <span id="contractStatus">Contract not loaded</span>
         </div>
       </section>
 
-      <section class="section demo-section" id="demo">
-        <div class="demo-copy">
-          <p class="eyebrow">Interactive demo</p>
-          <h2>Try the final ID rule</h2>
-          <p>
-            Enter a number. The demo mirrors the final Solidity contract: if the full ID is divisible
-            by its last two digits, it returns the stored name.
-          </p>
+      <section class="grid two">
+        <div class="card">
+          <h2>Registration</h2>
+          <p>Register the connected MetaMask account as an admin, patient, or doctor.</p>
+          <form id="registerForm">
+            <label>
+              Role
+              <select id="registerRole" required>
+                <option value="1">Admin</option>
+                <option value="2">Patient</option>
+                <option value="3">Doctor</option>
+              </select>
+            </label>
+            <label>
+              Name
+              <input id="registerName" required />
+            </label>
+            <label>
+              Age
+              <input id="registerAge" type="number" min="0" value="0" required />
+            </label>
+            <label>
+              District
+              <input id="registerDistrict" placeholder="Dhaka" />
+            </label>
+            <button type="submit">Register</button>
+          </form>
         </div>
-        <form class="checker-card" id="id-checker">
-          <label for="student-id">Student ID</label>
-          <input id="student-id" name="student-id" type="number" inputmode="numeric" placeholder="Example: 21301647" required />
-          <button class="button primary" type="submit">Check ID</button>
-          <output class="result" id="checker-result" for="student-id">Result will appear here.</output>
-        </form>
+
+        <div class="card">
+          <h2>My Account</h2>
+          <p id="myAccount">Connect MetaMask to view your on-chain profile.</p>
+          <button id="refreshData">Refresh Data</button>
+        </div>
       </section>
+
+      <section class="grid two">
+        <div class="card">
+          <h2>Admin: Update Patient Data</h2>
+          <p>Only registered admins can update patient age, district, and covid status.</p>
+          <form id="updatePatientForm">
+            <label>
+              Patient Address
+              <input id="patientAddress" placeholder="0x..." required />
+            </label>
+            <label>
+              Age
+              <input id="patientAge" type="number" min="0" required />
+            </label>
+            <label>
+              District
+              <input id="patientDistrict" required />
+            </label>
+            <label>
+              Covid Status
+              <select id="patientStatus" required>
+                <option value="unknown">unknown</option>
+                <option value="negative">negative</option>
+                <option value="positive">positive</option>
+                <option value="recovered">recovered</option>
+              </select>
+            </label>
+            <button type="submit">Update Patient</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Doctor Slots</h2>
+          <p>Doctors can add their own slots. Admins can add slots for any registered doctor.</p>
+          <form id="slotForm">
+            <label>
+              Doctor Address
+              <input id="slotDoctor" placeholder="Leave empty if you are the doctor" />
+            </label>
+            <label>
+              Slot Time
+              <input id="slotTime" placeholder="Sunday 10:30 AM" required />
+            </label>
+            <button type="submit">Add Slot</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <div class="card">
+          <h2>Book Doctor</h2>
+          <p>
+            Only registered patients can book an available doctor slot. The appointment fee is
+            paid from MetaMask to the selected admin.
+          </p>
+          <form id="bookForm">
+            <label>
+              Available Slot
+              <select id="slotSelect" required></select>
+            </label>
+            <label>
+              Admin Receiver
+              <select id="adminSelect" required></select>
+            </label>
+            <p class="muted">Appointment fee: <strong id="feeText">0.01 ETH</strong></p>
+            <button type="submit">Book Appointment</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Covid Trend Table</h2>
+          <p>Calculated from patients marked as covid positive in the smart contract.</p>
+          <table>
+            <tbody>
+              <tr>
+                <th>Median Age</th>
+                <td id="medianAge">-</td>
+              </tr>
+              <tr>
+                <th>Children (&lt; 13)</th>
+                <td id="childrenPercent">-</td>
+              </tr>
+              <tr>
+                <th>Teenagers (13 - 19)</th>
+                <td id="teenPercent">-</td>
+              </tr>
+              <tr>
+                <th>Young (20 - 49)</th>
+                <td id="youngPercent">-</td>
+              </tr>
+              <tr>
+                <th>Elder (50+)</th>
+                <td id="elderPercent">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <div>
+            <h2>Appointment Schedule</h2>
+            <p>All users can see every doctor's schedule and booking status.</p>
+          </div>
+          <button id="refreshSchedule">Refresh Schedule</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Slot</th>
+                <th>Doctor</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Patient</th>
+                <th>Paid To Admin</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleBody">
+              <tr>
+                <td colspan="6">No schedule loaded yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p id="message" class="message" aria-live="polite"></p>
     </main>
-
-    <footer class="footer">
-      <p>Built for the Blockchain Student Records Solidity project.</p>
-      <a href="https://github.com/Yuvraajrahman/CSE446" target="_blank" rel="noreferrer">Open the GitHub repository</a>
-    </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>

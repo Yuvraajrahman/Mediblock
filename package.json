@@ -1,18 +1,24 @@
 {
-  "name": "cse446",
+  "name": "mediblock",
   "version": "1.0.0",
-  "description": "A simple Blockchain Student Records website showcasing Solidity checkpoint contracts.",
+  "description": "Minimal patient management DApp for CSE446 Blockchain and Cryptocurrency final project.",
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --network development",
     "start": "npx serve ."
   },
+  "devDependencies": {
+    "truffle": "^5.11.5"
+  },
   "keywords": [
-    "blockchain-student-records",
-    "solidity",
+    "cse446",
     "blockchain",
-    "student-records"
+    "cryptocurrency",
+    "ethereum",
+    "patient-management"
   ],
-  "author": "Md. Tasnim Kabir",
+  "author": "BRACU CSE446",
   "license": "MIT"
 }

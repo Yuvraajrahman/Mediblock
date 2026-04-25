@@ -1,68 +1,49 @@
-# Blockchain Student Records
+# MediBlock Patient Management
 
-Blockchain Student Records is a simple Solidity learning project with a static project website. The repository shows a checkpoint-by-checkpoint progression from basic student ID checking to mapped student records and semester data storage.
+Minimal Ethereum patient-management DApp for the final project of the CSE446 Blockchain and Cryptocurrency course in BRACU.
 
-## Live Website
+The project is intentionally simple and focused on the required features:
 
-Live deployment: [mediblock-ten.vercel.app](https://mediblock-ten.vercel.app)
+- Admin, patient, and doctor registration through the smart contract.
+- Admin-only patient data update with covid status validation.
+- Patient appointment booking with MetaMask payment to a selected admin.
+- Public appointment schedule for every doctor.
+- Covid trend table showing median age and age-group percentages for positive patients.
 
-The website is designed for Vercel deployment and includes:
+## Local Testing
 
-- A landing page for the Blockchain Student Records app idea.
-- A GitHub repository link section.
-- A checkpoint timeline for the Solidity contracts.
-- A browser demo that mirrors the final `IDChecker` contract rule.
+This project is built for local testing with Ganache, Truffle, and MetaMask.
 
-Repository: [github.com/Yuvraajrahman/CSE446](https://github.com/Yuvraajrahman/CSE446)
+1. Install dependencies:
 
-## Project Files
+   ```bash
+   npm install
+   ```
 
-| File | Purpose |
-| --- | --- |
-| `checkpoint1.sol` | Checks an input student ID against one stored ID. |
-| `checkpoint2.sol` | Stores and retrieves student names using a mapping. |
-| `checkpoint3.sol` | Stores semester records using structs and arrays. |
-| `Final project submission.sol` | Final ID checker contract. |
-| `index.html` | Static website markup. |
-| `styles.css` | Website styling. |
-| `script.js` | Interactive browser demo for the final ID rule. |
-| `vercel.json` | Vercel deployment configuration. |
+2. Start Ganache on `127.0.0.1:7545`.
 
-## Final Solidity Contract
+3. Compile and deploy the smart contract:
 
-The final submission contract stores a student name and exposes a `checkID` function. It extracts the last two digits of the submitted ID, then returns the stored name when the full ID is divisible by those last two digits. If the rule fails, it returns `Not found`.
+   ```bash
+   npm run compile
+   npm run migrate
+   ```
 
-## Run Locally
+4. Copy the deployed `PatientManagement` contract address from Truffle output.
 
-Install dependencies if needed:
+5. Open the website and paste that address into the "Connect Local Contract" section.
 
-```bash
-npm install
-```
+6. Connect MetaMask to the same Ganache network and use imported Ganache accounts for admin, patient, and doctor testing.
 
-Validate the static website files:
+## Production Frontend
+
+The Vercel deployment hosts the static frontend only. Blockchain data and transactions still require a locally running Ganache chain, a deployed contract address, and MetaMask connected to that local network.
+
+## Useful Commands
 
 ```bash
 npm run build
-```
-
-Start a local static server:
-
-```bash
+npm run compile
+npm run migrate
 npm start
 ```
-
-## Deploy With Vercel CLI
-
-Install and run the Vercel CLI:
-
-```bash
-npm i -g vercel
-vercel --prod
-```
-
-The included `vercel.json` tells Vercel to run the static build check and serve the project root as the output directory.
-
-## Author
-
-Md. Tasnim Kabir
